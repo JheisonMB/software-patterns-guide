@@ -1,0 +1,43 @@
+{%- assign url_parts = page.url | remove_first: '/' | split: '/' -%}
+{%- assign breadcrumb_path = '' -%}
+
+<nav class="breadcrumb-nav">
+  <a href="{{ '/' | relative_url }}" class="breadcrumb-item">Home</a>
+  
+  {%- for part in url_parts -%}
+    {%- unless part == '' or part == 'index.html' -%}
+      {%- assign breadcrumb_path = breadcrumb_path | append: '/' | append: part -%}
+      
+      {%- comment -%} Clean up the display name {%- endcomment -%}
+      {%- assign display_name = part | replace: '.html', '' | replace: '.md', '' -%}
+      
+      {%- comment -%} Handle special cases {%- endcomment -%}
+      {%- case display_name -%}
+        {%- when 'patrones-diseno' -%}
+          {%- assign display_name = 'Patrones de Diseño' -%}
+        {%- when 'patrones-arquitectura' -%}
+          {%- assign display_name = 'Patrones de Arquitectura' -%}
+        {%- when 'principios-diseno' -%}
+          {%- assign display_name = 'Principios de Diseño' -%}
+        {%- when 'creacionales' -%}
+          {%- assign display_name = 'Creacionales' -%}
+        {%- when 'estructurales' -%}
+          {%- assign display_name = 'Estructurales' -%}
+        {%- when 'comportamiento' -%}
+          {%- assign display_name = 'Comportamiento' -%}
+        {%- when 'patterns' -%}
+          {%- assign display_name = 'Patrones' -%}
+        {%- else -%}
+          {%- assign display_name = display_name | replace: '-', ' ' | capitalize -%}
+      {%- endcase -%}
+      
+      <span class="breadcrumb-separator"> / </span>
+      
+      {%- unless forloop.last -%}
+        <a href="{{ breadcrumb_path | relative_url }}" class="breadcrumb-item">{{ display_name }}</a>
+      {%- else -%}
+        <span class="breadcrumb-current">{{ display_name }}</span>
+      {%- endunless -%}
+    {%- endunless -%}
+  {%- endfor -%}
+</nav>

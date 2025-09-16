@@ -1,0 +1,337 @@
+// ==========================================================================
+// CUSTOM STYLES FOR SOFTWARE PATTERNS GUIDE
+// ==========================================================================
+
+@import "variables";
+
+// Base Overrides
+// ==========================================================================
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: $font-family-base;
+  line-height: $line-height-base;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+// Header Customization
+// ==========================================================================
+.site-header {
+  background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+  border-bottom: none;
+  box-shadow: $box-shadow-header;
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $spacing-md 0;
+}
+
+.site-title {
+  margin: 0;
+  font-size: $font-size-large;
+  font-weight: 600;
+
+  a {
+    color: white !important;
+    text-decoration: none;
+    text-shadow: $text-shadow-header;
+
+    &:hover {
+      color: #f0f0f0 !important;
+    }
+  }
+}
+
+// Breadcrumb Navigation
+// ==========================================================================
+.breadcrumb-nav {
+  margin-top: $spacing-sm;
+  font-size: 0.9rem;
+  color: $header-text-color;
+}
+
+.breadcrumb-item {
+  color: $header-text-color !important;
+  text-decoration: none;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: white !important;
+    text-decoration: underline;
+  }
+}
+
+.breadcrumb-separator {
+  color: rgba(255,255,255,0.5);
+  margin: 0 $spacing-xs;
+}
+
+.breadcrumb-current {
+  color: white;
+  font-weight: 500;
+}
+
+// Header Links
+// ==========================================================================
+.header-links {
+  margin-top: $spacing-sm;
+}
+
+.glossary-link {
+  color: $header-text-color !important;
+  text-decoration: none;
+  font-size: $font-size-small;
+  padding: $spacing-xs 0.8rem;
+  border: 1px solid rgba(255,255,255,0.25);
+  border-radius: $border-radius-small;
+  transition: all $transition-fast;
+
+  &:hover {
+    color: white !important;
+    background: rgba(255,255,255,0.1);
+    border-color: rgba(255,255,255,0.5);
+  }
+}
+
+// Content Layout
+// ==========================================================================
+.main-content {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: $spacing-xl $spacing-md;
+  line-height: $line-height-base;
+}
+
+.wrapper {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 $spacing-md;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin-top: $spacing-xl;
+  margin-bottom: $spacing-md;
+}
+
+p, ul, ol {
+  margin-bottom: $spacing-md;
+}
+
+.main-content h1:first-child {
+  margin-top: 0;
+}
+
+// Component Styling
+// ==========================================================================
+
+// Mermaid Diagrams
+.mermaid {
+  text-align: center;
+  margin: $spacing-xl 0;
+}
+
+// Tables
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: $spacing-lg 0;
+  box-shadow: $box-shadow-light;
+
+  th {
+    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+    color: white;
+    padding: 0.8rem;
+    text-align: left;
+  }
+
+  td {
+    padding: 0.8rem;
+    border-bottom: 1px solid $border-color;
+  }
+
+  tr:hover {
+    background-color: $hover-background;
+  }
+}
+
+// Code Blocks
+code {
+  background-color: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+}
+
+pre {
+  padding: $spacing-md;
+  border-radius: $border-radius;
+  overflow-x: auto;
+  background-color: $code-background !important;
+  border: 1px solid $code-border !important;
+}
+
+pre code {
+  background-color: transparent !important;
+  border: none !important;
+}
+
+// Override Jekyll theme code block styles
+.highlight {
+  background-color: $code-background !important;
+  border: 1px solid $code-border !important;
+  border-radius: $border-radius;
+}
+
+.highlight pre {
+  background-color: $code-background !important;
+  margin: 0;
+}
+
+// CSS Custom Properties for Mermaid
+:root {
+  --mermaid-primary-bg: #{$mermaid-primary-bg};
+  --mermaid-secondary-bg: #{$mermaid-secondary-bg};
+  --mermaid-tertiary-bg: #{$mermaid-tertiary-bg};
+  --mermaid-text-color: #{$mermaid-text-color};
+  --mermaid-border-color: #{$mermaid-border-color};
+  --mermaid-line-color: #{$mermaid-line-color};
+  --mermaid-note-bg: #{$mermaid-note-bg};
+  --mermaid-note-border: #{$mermaid-note-border};
+  --mermaid-note-text: #{$mermaid-note-text};
+}
+
+// Mermaid note override
+.mermaid .note {
+  fill: var(--mermaid-note-bg) !important;
+  stroke: var(--mermaid-note-border) !important;
+}
+
+.mermaid .noteText {
+  fill: var(--mermaid-note-text) !important;
+}
+
+// Links
+a {
+  color: $primary-gradient-start;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $primary-gradient-end;
+  }
+}
+
+// Interactive Elements
+// ==========================================================================
+
+// Collapsible Sections
+details {
+  margin: $spacing-md 0;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  overflow: hidden;
+
+  summary {
+    background: linear-gradient(135deg, $summary-bg-start 0%, $summary-bg-end 100%);
+    padding: $spacing-md;
+    cursor: pointer;
+    font-weight: 600;
+    border-bottom: 1px solid $border-color;
+    transition: background $transition-fast;
+
+    &:hover {
+      background: linear-gradient(135deg, $summary-hover-start 0%, $summary-hover-end 100%);
+    }
+  }
+
+  &[open] summary {
+    background: linear-gradient(135deg, $primary-gradient-start 0%, $primary-gradient-end 100%);
+    color: white;
+  }
+
+  div {
+    padding: $spacing-md;
+  }
+
+  p, ul, ol {
+    margin: $spacing-md 0;
+  }
+
+  ul {
+    padding-left: $spacing-lg;
+  }
+
+  li {
+    margin: $spacing-sm 0;
+    line-height: $line-height-base;
+  }
+
+  a {
+    color: $primary-gradient-start;
+    text-decoration: none;
+
+    &:hover {
+      color: $primary-gradient-end;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Footer
+// ==========================================================================
+.site-footer {
+  background: $hover-background;
+  border-top: 1px solid $border-color;
+  margin-top: $spacing-xxl;
+  padding: $spacing-xl 0;
+}
+
+.footer-content {
+  text-align: center;
+  color: $footer-text-color;
+  font-size: 0.9rem;
+
+  p {
+    margin: 0;
+  }
+}
+
+// Responsive Design
+// ==========================================================================
+@media screen and (max-width: 768px) {
+  .main-content {
+    padding: $spacing-md $spacing-sm;
+  }
+  
+  .wrapper {
+    padding: 0 $spacing-sm;
+  }
+  
+  .header-content {
+    padding: 0.8rem 0;
+  }
+  
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  .breadcrumb-nav {
+    font-size: 0.8rem;
+    text-align: center;
+  }
+  
+  .breadcrumb-separator {
+    margin: 0 0.2rem;
+  }
+
+  .header-links {
+    flex-direction: column;
+    gap: $spacing-xs;
+  }
+}

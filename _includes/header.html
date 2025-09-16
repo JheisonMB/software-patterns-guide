@@ -1,0 +1,17 @@
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    <div class="header-content">
+      <h1 class="site-title">
+        <a rel="author" href="{{ "/" | relative_url }}">{{ site.title | escape }}</a>
+      </h1>
+      
+      <!-- Breadcrumb Navigation -->
+      {%- include breadcrumb.html -%}
+      
+      <!-- Header Links -->
+      <div class="header-links">
+        <a href="{{ '/GLOSARIO' | relative_url }}" class="glossary-link">Glosario</a>
+      </div>
+    </div>
+  </div>
+</header>

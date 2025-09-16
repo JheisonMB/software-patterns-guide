@@ -1,0 +1,60 @@
+# GitHub Pages Configuration
+title: "Patrones de Arquitectura y Diseño"
+description: "Micrositio de notas sobre principios SOLID, patrones de diseño GoF y arquitecturas modernas"
+author: "Notas Técnicas"
+email: ""
+
+# Theme - Using custom styles
+# theme: jekyll-theme-minimal
+# Alternative themes: minima, jekyll-theme-cayman, jekyll-theme-architect
+
+# GitHub Pages settings
+baseurl: "/software-patterns-guide" # Nombre del repositorio
+url: "https://tu-usuario.github.io" # Cambia por tu usuario de GitHub
+
+# Markdown settings
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Mermaid support
+mermaid:
+  src: 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js'
+
+# Navigation
+header_pages:
+  - GLOSARIO.md
+
+# Collections for better organization
+collections:
+  principios:
+    output: true
+    permalink: /:collection/:name/
+  patrones-arquitectura:
+    output: true
+    permalink: /:collection/:name/
+  patrones-diseno:
+    output: true
+    permalink: /:collection/:name/
+
+# Exclude files from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor/bundle/
+  - vendor/cache/
+  - vendor/gems/
+  - vendor/ruby/
+
+# Include files
+include:
+  - _pages

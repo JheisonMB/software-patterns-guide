@@ -1,0 +1,55 @@
+<script src="https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get CSS custom properties
+    const rootStyles = getComputedStyle(document.documentElement);
+    const primaryBg = rootStyles.getPropertyValue('--mermaid-primary-bg').trim();
+    const secondaryBg = rootStyles.getPropertyValue('--mermaid-secondary-bg').trim();
+    const tertiaryBg = rootStyles.getPropertyValue('--mermaid-tertiary-bg').trim();
+    const textColor = rootStyles.getPropertyValue('--mermaid-text-color').trim();
+    const borderColor = rootStyles.getPropertyValue('--mermaid-border-color').trim();
+    const lineColor = rootStyles.getPropertyValue('--mermaid-line-color').trim();
+    
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: primaryBg,
+        primaryTextColor: textColor,
+        primaryBorderColor: borderColor,
+        lineColor: lineColor,
+        secondaryColor: secondaryBg,
+        tertiaryColor: tertiaryBg,
+        background: tertiaryBg,
+        mainBkg: primaryBg,
+        secondBkg: secondaryBg,
+        tertiaryBkg: tertiaryBg,
+        // Class diagram specific
+        classText: textColor,
+        // Flowchart specific
+        nodeBkg: primaryBg,
+        nodeBorder: borderColor,
+        clusterBkg: secondaryBg,
+        clusterBorder: borderColor,
+        // Sequence diagram specific
+        actorBkg: primaryBg,
+        actorBorder: borderColor,
+        actorTextColor: textColor,
+        actorLineColor: lineColor,
+        signalColor: textColor,
+        signalTextColor: textColor
+      }
+    });
+    
+    // Convert code blocks with language-mermaid to mermaid divs
+    document.querySelectorAll('pre code.language-mermaid').forEach(function(element) {
+      const mermaidDiv = document.createElement('div');
+      mermaidDiv.className = 'mermaid';
+      mermaidDiv.textContent = element.textContent;
+      element.parentNode.parentNode.replaceChild(mermaidDiv, element.parentNode);
+    });
+    
+    // Render mermaid diagrams
+    mermaid.run();
+  });
+</script>
