@@ -20,11 +20,19 @@ Centraliza la comunicación entre objetos en un mediador. Los objetos no se cono
 - Sistemas de notificaciones
 - Coordinación entre microservicios
 
+## ¿Quién es quién en Mediator?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Mediator** | Interfaz que define cómo coordinar | `DialogMediator` - define `notify(sender, event)` | "Torre de control" (interfaz) |
+| **ConcreteMediator** | Coordinador que conoce todos los componentes | `AuthenticationDialog` - maneja toda la comunicación | Torre de control del aeropuerto |
+| **Component** | Participantes que solo hablan con el mediator | `Button`, `TextBox`, `Checkbox` | Aviones (solo hablan con la torre) |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Mediator {
+    namespace MediatorPattern {
         class Mediator {
             <<interface>>
             +notify(sender, event)

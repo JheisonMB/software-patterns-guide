@@ -20,11 +20,19 @@ Permite que múltiples objetos tengan la oportunidad de procesar una solicitud, 
 - Filtros de contenido
 - Sistemas de logging con diferentes niveles
 
+## ¿Quién es quién en Chain of Responsibility?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Handler** | Interfaz que define cómo manejar requests | `AuthenticationHandler` - define `authenticate()` | "Ventanilla" (interfaz de atención) |
+| **ConcreteHandler** | Manejadores que deciden si procesan o pasan | `BasicAuthHandler`, `JWTAuthHandler` | Ventanilla 1, 2, 3 (cada una maneja ciertos trámites) |
+| **Client** | Envía el request, no sabe quién lo procesará | `AuthenticationService` - inicia la cadena | Ciudadano con un trámite |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace ChainOfResponsibility {
+    namespace ChainOfResponsibilityPattern {
         class Handler {
             <<abstract>>
             -nextHandler: Handler

@@ -16,6 +16,16 @@ Proporcionar una interfaz para crear familias de objetos relacionados o dependie
 - Formatos de exportación (PDF, Excel, Word)
 - Protocolos de comunicación (HTTP, HTTPS, FTP)
 
+## ¿Quién es quién en Abstract Factory?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **AbstractFactory** | Interfaz de fábrica que define `createProductX()` | `UIFactory` - define qué componentes crear | "Fábrica de muebles" (interfaz) |
+| **ConcreteFactory** | Fábricas que crean productos de UNA familia | `WindowsFactory`, `MacFactory` | Fábrica de muebles modernos vs clásicos |
+| **AbstractProduct** | Interfaces de productos | `Button`, `Checkbox` - definen qué pueden hacer | "Silla", "Mesa" (tipos de muebles) |
+| **ConcreteProduct** | Implementaciones concretas de productos | `WindowsButton`, `MacButton` | Silla moderna vs Silla clásica |
+| **Client** | Usa productos, solo conoce interfaces abstractas | `Application` - no sabe si usa Windows o Mac | Decorador (quiere muebles que combinen) |
+
 ## Diagrama
 
 ```mermaid

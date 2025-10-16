@@ -20,11 +20,21 @@ Convierte expresiones de texto (como "age >= 18 AND income > 30000") en objetos 
 - Validadores de expresiones regulares
 - Intérpretes de comandos
 
+## ¿Quién es quién en Interpreter?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **AbstractExpression** | Interfaz que define `interpret(context)` | `Expression` - define cómo evaluarse | "Elemento de fórmula" (interfaz) |
+| **TerminalExpression** | Elementos básicos (hojas del árbol) | `NumberExpression`, `VariableExpression` | Números en pantalla (3, 5, x) |
+| **NonTerminalExpression** | Operadores (nodos del árbol) | `AddExpression`, `MultiplyExpression` | Botones de operación (+, -, *, /) |
+| **Context** | Almacena variables y valores | `Context` con variables x=3, y=5 | Calculadora con memoria |
+| **Client** | Construye y evalúa el árbol | Parser + evaluador | Persona usando calculadora |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Interpreter {
+    namespace InterpreterPattern {
         class AbstractExpression {
             <<interface>>
             +interpret(context) Result

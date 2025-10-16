@@ -20,6 +20,14 @@ Cuando un objeto cambia, notifica automáticamente a todos los interesados. Los 
 - Actualizaciones en tiempo real
 - Sistemas de suscripción/publicación
 
+## ¿Quién es quién en Observer?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Subject** | El observado, mantiene lista de observers | `OrderSubject` - notifica cuando cambia estado | Canal de YouTube (publica contenido) |
+| **Observer** | Interfaz que define cómo recibir notificaciones | `OrderObserver` - define `onOrderStatusChanged()` | "Suscriptor" (interfaz para notificaciones) |
+| **ConcreteObserver** | Suscriptores que reaccionan diferente | `EmailObserver`, `InventoryObserver` | Tú, tu amigo (cada uno reacciona diferente) |
+
 ## Diagrama
 
 ```mermaid

@@ -16,6 +16,16 @@ Proporcionar una interfaz unificada para un conjunto de interfaces en un subsist
 - **Servicios de alto nivel**: Un servicio que coordina base de datos, cache y logs
 - **Integraciones**: Un cliente que simplifica APIs complejas de terceros
 
+## ¿Quién es quién en Facade?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Facade** | Interfaz simplificada que coordina | `HomeTheaterFacade` - ofrece `startMovie()` | Recepcionista de hotel (interfaz simple) |
+| **Subsystem Classes** | Clases complejas con responsabilidades específicas | `AudioSystem`, `VideoSystem`, `LightingSystem` | Limpieza, Cocina, Mantenimiento |
+| **Client** | Usuario que solo conoce la interfaz simple | Cliente que llama `theater.startMovie()` | Huésped (solo habla con recepcionista) |
+
+**Clave**: El Facade NO reemplaza el subsistema, solo lo simplifica
+
 ## Diagrama
 
 ```mermaid

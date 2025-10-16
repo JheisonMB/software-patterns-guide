@@ -12,6 +12,12 @@ Encapsula una operación completa (acción + parámetros + receptor) en un objet
 ## Concepto clave
 **Operación como objeto**: En lugar de llamar directamente `editor.copy()`, creas un objeto `CopyCommand` que sabe cómo ejecutar y deshacer esa operación.
 
+**Ejemplo simple**: En lugar de `suma = a + b`, creas un objeto `SumarCommand(a, b)` que:
+- Sabe cómo hacer la suma
+- Puede ejecutarse más tarde
+- Puede deshacerse (restando)
+- Puede guardarse en una lista de operaciones
+
 ## Casos de uso comunes
 - Sistemas de undo/redo
 - Macros y scripts
@@ -19,6 +25,15 @@ Encapsula una operación completa (acción + parámetros + receptor) en un objet
 - Logging de operaciones
 - Transacciones y rollbacks
 - Interfaces gráficas (botones, menús)
+
+## ¿Quién es quién en Command?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Command** | Interfaz que define `execute()` y `undo()` | `Command` - operaciones que se pueden deshacer | "Señal infrarroja" (mensaje) |
+| **ConcreteCommand** | Sabe QUÉ hacer y CÓMO deshacerlo | `CopyCommand`, `PasteCommand` | Comando específico del control |
+| **Receiver** | El que REALMENTE hace el trabajo | `TextEditor` - tiene la lógica real | Televisor (hace el trabajo real) |
+| **Invoker** | El que ejecuta comandos | `EditorInvoker` - botones, menús | Control remoto (botón) |
 
 ## Diagrama
 
@@ -40,24 +55,27 @@ classDiagram
         
         class Receiver {
             +action()
+            note "Hace el trabajo REAL"
         }
         
         class Invoker {
             -command: Command
             +setCommand(command)
             +executeCommand()
+            note "Botón, menú, etc."
         }
         
         class Client {
             +createCommand()
+            note "Conecta todo"
         }
     }
     
     Command <|.. ConcreteCommand
-    ConcreteCommand --> Receiver
-    Invoker --> Command
-    Client --> ConcreteCommand
-    Client --> Receiver
+    ConcreteCommand --> Receiver : "delega a"
+    Invoker --> Command : "ejecuta"
+    Client --> ConcreteCommand : "crea"
+    Client --> Receiver : "conoce"
 ```
 
 ## Ejemplo práctico
@@ -126,7 +144,16 @@ classDiagram
     CommandHistory --> Command
 ```
 
-## Flujo de ejecución
+## Flujo paso a paso
+
+**Ejemplo concreto**: Usuario hace clic en "Copiar" en un editor
+
+1. **Client** crea: `CopyCommand(textEditor)` 
+2. **Client** le dice al **Invoker** (botón): "ejecuta este comando"
+3. **Invoker** llama: `command.execute()`
+4. **Command** llama: `textEditor.copy()` (delega al Receiver)
+5. **Receiver** (TextEditor) hace el trabajo real
+6. **Invoker** guarda el comando en historial para undo
 
 ```mermaid
 sequenceDiagram
@@ -136,44 +163,23 @@ sequenceDiagram
     participant Receiver
     participant History
     
-    Client->>Command: new CopyCommand(receiver)
+    Note over Client,Receiver: 1. Preparación
+    Client->>Command: new CopyCommand(textEditor)
     Client->>Invoker: executeCommand(command)
+    
+    Note over Invoker,Receiver: 2. Ejecución
     Invoker->>Command: execute()
-    Command->>Receiver: copy()
+    Command->>Receiver: copy() - hace trabajo real
     Receiver-->>Command: result
     Command-->>Invoker: success
-    Invoker->>History: push(command)
+    Invoker->>History: push(command) - para undo
     
-    Note over Client: Later - Undo operation
+    Note over Client,Receiver: 3. Undo (más tarde)
     Client->>Invoker: undo()
-    Invoker->>History: pop()
-    History-->>Invoker: last command
+    Invoker->>History: pop() - último comando
+    History-->>Invoker: CopyCommand
     Invoker->>Command: undo()
-    Command->>Receiver: restore previous state
-```
-
-## Casos de uso prácticos
-
-```java
-// 1. Undo/Redo
-CommandHistory history = new CommandHistory();
-Command copyCmd = new CopyCommand(editor);
-history.execute(copyCmd);  // Ejecuta y guarda
-history.undo();           // Deshace la última operación
-
-// 2. Macros (múltiples operaciones)
-MacroCommand formatText = new MacroCommand()
-    .add(new SelectAllCommand(editor))
-    .add(new BoldCommand(editor))
-    .add(new CenterAlignCommand(editor));
-formatText.execute();     // Ejecuta todas las operaciones
-formatText.undo();        // Deshace todas en orden inverso
-
-// 3. Colas de trabajo
-Queue<Command> jobQueue = new LinkedList<>();
-jobQueue.add(new SendEmailCommand(email));
-jobQueue.add(new GenerateReportCommand(data));
-// Procesar más tarde...
+    Command->>Receiver: restore() - deshace
 ```
 
 ## Ventajas

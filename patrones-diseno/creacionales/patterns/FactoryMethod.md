@@ -16,6 +16,17 @@ Definir una interfaz para crear objetos, pero permitir que las subclases decidan
 - Loggers con diferentes destinos (archivo, consola, red)
 - Conexiones de base de datos (MySQL, PostgreSQL, MongoDB)
 
+## ¿Quién es quién en Factory Method?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Creator** | Clase abstracta con factory method y lógica común | `DocumentCreator` - define `createDocument()` | "Fábrica" (proceso general) |
+| **ConcreteCreator** | Creadores que saben qué producto crear | `PDFCreator`, `WordCreator` | Fábrica de autos, fábrica de motos |
+| **Product** | Interfaz que define qué pueden hacer | `Document` - define `open()`, `save()`, `close()` | "Vehículo" (qué puede hacer) |
+| **ConcreteProduct** | Implementaciones reales de productos | `PDFDocument`, `WordDocument` | Auto, Moto (vehículos específicos) |
+
+**Clave**: El cliente conoce el Creator pero NO el Product concreto
+
 ## Diagrama
 
 ```mermaid

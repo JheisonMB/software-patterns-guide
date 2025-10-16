@@ -19,6 +19,15 @@ Permite que objetos individuales (Leaf) y contenedores (Composite) implementen l
 - **Organizaciones**: empleados y departamentos
 - **Validación**: reglas simples y grupos de reglas
 
+## ¿Quién es quién en Composite?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Component** | Interfaz común para simples y compuestos | `FileSystemComponent` - operaciones para archivos y carpetas | "Elemento del sistema de archivos" |
+| **Leaf** | Objetos simples, no tienen hijos | `File` - hace el trabajo real, no contiene otros | Archivo (no contiene nada más) |
+| **Composite** | Contenedores, delegan recursivamente | `Directory` - contiene otros componentes | Carpeta (contiene archivos y carpetas) |
+| **Client** | Usa la estructura, trata todo igual | Usuario - pide tamaño sin saber si es archivo o carpeta | Usuario (transparencia total) |
+
 ## Diagrama
 
 ```mermaid

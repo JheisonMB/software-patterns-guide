@@ -20,11 +20,20 @@ Permite navegar por cualquier colección (array, lista, árbol) usando la misma 
 - Procesamiento de listas grandes
 - Múltiples formas de recorrer la misma estructura
 
+## ¿Quién es quién en Iterator?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Iterator** | Interfaz que define `hasNext()` y `next()` | `BookIterator` - define cómo recorrer | "Forma de recorrer" (interfaz) |
+| **ConcreteIterator** | Sabe CÓMO recorrer una estructura | `ForwardIterator`, `GenreIterator` | Bibliotecario específico (por género, autor) |
+| **Aggregate** | Interfaz de colección con `createIterator()` | `BookCollection` - define qué iteradores crear | "Biblioteca" (interfaz) |
+| **ConcreteAggregate** | Colección que crea sus iteradores | `Library` - crea iteradores para sí misma | Biblioteca real (tiene libros) |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Iterator {
+    namespace IteratorPattern {
         class Iterator {
             <<interface>>
             +hasNext() boolean
@@ -168,34 +177,6 @@ sequenceDiagram
             Client->>Client: process(item)
         end
     end
-```
-
-## Casos de uso prácticos
-
-```java
-// 1. Múltiples formas de recorrer
-Library library = new Library();
-
-// Recorrido normal
-Iterator<Book> forward = library.createIterator();
-while (forward.hasNext()) {
-    Book book = forward.next();
-    System.out.println(book.getTitle());
-}
-
-// Recorrido inverso
-Iterator<Book> reverse = library.createReverseIterator();
-while (reverse.hasNext()) {
-    Book book = reverse.next();
-    System.out.println(book.getTitle());
-}
-
-// Filtrado por género
-Iterator<Book> sciFi = library.createGenreIterator("Science Fiction");
-while (sciFi.hasNext()) {
-    Book book = sciFi.next();
-    System.out.println(book.getTitle());
-}
 ```
 
 ## Ventajas

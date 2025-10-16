@@ -1,5 +1,4 @@
 name: Deploy to GitHub Pages
-# Force rebuild for SSL fix
 
 on:
   push:
@@ -17,7 +16,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  build: 
     runs-on: ubuntu-latest
     steps:
       - name: Checkout

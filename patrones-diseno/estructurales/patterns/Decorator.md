@@ -19,6 +19,17 @@ Envolver un objeto con capas adicionales de funcionalidad. Cada decorador añade
 - **UI**: botón + sombra + borde + animación
 - **Texto**: texto + negrita + cursiva + subrayado
 
+## ¿Quién es quién en Decorator?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Component** | Interfaz común para originales y decoradores | `Coffee` - define `getDescription()`, `getCost()` | "Bebida" (interfaz) |
+| **ConcreteComponent** | Objeto base con funcionalidad básica | `SimpleCoffee` - café sin nada | Café simple (bebida básica) |
+| **BaseDecorator** | Decorador base que mantiene referencia | `CoffeeDecorator` - delega al componente | "Ingrediente" (base para añadir) |
+| **ConcreteDecorator** | Decoradores que añaden funcionalidad | `MilkDecorator`, `SugarDecorator` | Leche, Azúcar (ingredientes específicos) |
+
+**Clave**: Cada decorador ES-UN Component Y TIENE-UN Component (composición + herencia)
+
 ## Diagrama
 
 ```mermaid
