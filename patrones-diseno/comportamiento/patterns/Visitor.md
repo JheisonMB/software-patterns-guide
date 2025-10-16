@@ -20,11 +20,20 @@ Separa las operaciones de los objetos sobre los que actúan. Puedes agregar nuev
 - Análisis de código fuente
 - Transformaciones de datos
 
+## ¿Quién es quién en Visitor?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Visitor** | Interfaz que define `visitElementA()`, etc. | `DocumentVisitor` - define qué hacer con cada elemento | "Inspector" (interfaz) |
+| **ConcreteVisitor** | Implementa QUÉ hacer con cada elemento | `PDFExportVisitor`, `HTMLExportVisitor` | Inspector de seguridad, de impuestos |
+| **Element** | Interfaz de elementos con `accept(visitor)` | `DocumentElement` - define cómo recibir visitantes | "Edificio" (interfaz) |
+| **ConcreteElement** | Elementos que saben recibir visitantes | `Paragraph`, `Image`, `Table` | Casa, Oficina (saben recibir inspectores) |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Visitor {
+    namespace VisitorPattern {
         class Visitor {
             <<interface>>
             +visitConcreteElementA(element)
@@ -188,15 +197,15 @@ flowchart TD
     C --> F[Table]
     C --> G[Header]
     
-    D --> H[paragraph.accept(visitor)]
-    E --> I[image.accept(visitor)]
-    F --> J[table.accept(visitor)]
-    G --> K[header.accept(visitor)]
+    D --> H["paragraph.accept(visitor)"]
+    E --> I["image.accept(visitor)"]
+    F --> J["table.accept(visitor)"]
+    G --> K["header.accept(visitor)"]
     
-    H --> L[visitor.visitParagraph(this)]
-    I --> M[visitor.visitImage(this)]
-    J --> N[visitor.visitTable(this)]
-    K --> O[visitor.visitHeader(this)]
+    H --> L["visitor.visitParagraph(this)"]
+    I --> M["visitor.visitImage(this)"]
+    J --> N["visitor.visitTable(this)"]
+    K --> O["visitor.visitHeader(this)"]
     
     L --> P[Process & Export]
     M --> P

@@ -12,6 +12,8 @@ Encapsula diferentes algoritmos en clases separadas y permite intercambiarlos en
 ## Concepto clave
 **Algoritmo intercambiable**: Como cambiar el método de pago en una tienda online - el proceso es el mismo pero el algoritmo de pago cambia (tarjeta, PayPal, transferencia).
 
+**En términos simples**: Cambiar el "cómo" sin cambiar el "qué". El Context siempre hace lo mismo (calcular precio), pero la Strategy define cómo lo hace.
+
 ## Casos de uso comunes
 - Algoritmos de pricing (descuentos, promociones)
 - Métodos de pago (tarjeta, PayPal, transferencia)
@@ -20,11 +22,19 @@ Encapsula diferentes algoritmos en clases separadas y permite intercambiarlos en
 - Algoritmos de compresión
 - Estrategias de caching
 
+## ¿Quién es quién en Strategy?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Context** | Usa las estrategias, mantiene referencia actual | `PricingContext` - siempre calcula precios | Calculadora de precios |
+| **Strategy** | Interfaz que define qué pueden hacer | `PricingStrategy` - define `calculatePrice()` | "Método de cálculo" (interfaz) |
+| **ConcreteStrategy** | Implementaciones que hacen el trabajo diferente | `VIPPricingStrategy`, `SeasonalPricingStrategy` | Descuento VIP, descuento temporal |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Strategy {
+    namespace StrategyPattern {
         class Context {
             -strategy: Strategy
             +setStrategy(strategy)
@@ -135,16 +145,20 @@ sequenceDiagram
     participant Factory
     participant Strategy
     
+    Note over Client,Factory: 1. Factory crea la estrategia según contexto
     Client->>Factory: createStrategy(customerType, conditions)
     Factory->>Strategy: new ConcreteStrategy()
     Factory-->>Client: strategy
     
+    Note over Client,Context: 2. Context recibe y usa la estrategia
     Client->>Context: setStrategy(strategy)
     Client->>Context: executeStrategy(order)
     Context->>Strategy: execute(order)
     Strategy->>Strategy: apply algorithm
     Strategy-->>Context: result
     Context-->>Client: result
+    
+    Note over Client,Strategy: El Factory decide QUÉ estrategia - El Context ejecuta CÓMO funciona
 ```
 
 
@@ -176,3 +190,4 @@ sequenceDiagram
 ## Diferencias con otros patrones
 - **vs State**: Strategy se cambia externamente por el cliente, State cambia automáticamente según estado interno
 - **vs Template Method**: Strategy cambia todo el algoritmo, Template Method solo algunos pasos del algoritmo
+- **vs Factory**: Factory decide QUÉ crear, Strategy define CÓMO ejecutar

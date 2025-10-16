@@ -16,6 +16,15 @@ Especificar los tipos de objetos a crear usando una instancia prototípica, y cr
 - Caches de objetos complejos
 - Sistemas con muchas variaciones de objetos similares
 
+## ¿Quién es quién en Prototype?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Prototype** | Interfaz que define `clone()` | `GameCharacter` - define cómo copiarse | "Molde" (interfaz) |
+| **ConcretePrototype** | Saben cómo clonarse correctamente | `Warrior`, `Mage` - implementan clonación | Molde maestro (configuración perfecta) |
+| **PrototypeRegistry** | Catálogo que almacena prototipos | `CharacterRegistry` - "Guerrero nivel 10" | Biblioteca de moldes |
+| **Client** | Clona en lugar de crear desde cero | `GameSession` - quiere personaje personalizado | Jugador (quiere personaje similar) |
+
 ## Diagrama
 
 ```mermaid

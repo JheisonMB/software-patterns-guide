@@ -15,6 +15,15 @@ Convertir la interfaz de una clase en otra interfaz que el cliente espera. Permi
 - Conectar APIs con diferentes formatos de datos
 - Reutilizar código existente sin modificarlo
 
+## ¿Quién es quién en Adapter?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Target** | Interfaz que el cliente espera | `PaymentProcessor` - cómo quiere trabajar el cliente | "Hablar en español" (interfaz esperada) |
+| **Adapter** | Traduce entre Target y Adaptee | `PaymentAdapter` - convierte llamadas modernas a legacy | Traductor |
+| **Adaptee** | Clase existente con interfaz incompatible | `LegacyPayment` - funcionalidad útil pero diferente interfaz | Guía local que solo habla inglés |
+| **Client** | Usa el servicio, solo conoce Target | `Client` - procesa órdenes usando PaymentProcessor | Turista español |
+
 ## Diagrama
 
 ```mermaid

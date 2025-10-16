@@ -19,6 +19,15 @@ Compartir objetos para ahorrar memoria. En lugar de crear 1000 objetos idéntico
 - **Iconos**: Mismos iconos en diferentes lugares de la UI
 - **Partículas**: Efectos de fuego, humo, lluvia
 
+## ¿Quién es quién en Flyweight?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Flyweight** | Interfaz que define `operation(extrinsicState)` | `TreeFlyweight` - define cómo renderizar | "Molde" (interfaz) |
+| **ConcreteFlyweight** | Objeto compartido con estado intrínseco | `TreeType` - almacena nombre y sprite (inmutable) | Molde de galleta (se reutiliza) |
+| **FlyweightFactory** | Administrador que crea y reutiliza | `TreeFactory` - crea y reutiliza TreeTypes | Cocinero (reutiliza moldes) |
+| **Context** | Objeto que usa flyweight + estado extrínseco | `Tree` - posición, tamaño (variable) | Galleta individual (posición, decoración) |
+
 ## Diagrama
 
 ```mermaid

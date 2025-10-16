@@ -20,11 +20,19 @@ Define el esqueleto del algoritmo en la clase padre y deja que las subclases imp
 - Workflows de negocio
 - Algoritmos de parsing
 
+## ¿Quién es quién en Template Method?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **AbstractClass** | Define el esqueleto del algoritmo | `DataProcessor` - define pasos: leer, validar, transformar | Receta de cocina (pasos fijos) |
+| **ConcreteClass** | Implementa los pasos específicos | `CSVProcessor`, `XMLProcessor` | Cocinero específico (pasta vs pizza) |
+| **Hook Methods** | Puntos de extensión opcionales | `cleanup()`, `postProcess()` | Pasos opcionales ("agregar especias") |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace TemplateMethod {
+    namespace TemplateMethodPattern {
         class AbstractClass {
             <<abstract>>
             +templateMethod()

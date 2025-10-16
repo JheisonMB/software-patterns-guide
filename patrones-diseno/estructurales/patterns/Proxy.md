@@ -17,6 +17,15 @@ Proporcionar un sustituto o placeholder para otro objeto para controlar el acces
 - Validación antes de operaciones
 - Conexiones remotas (Remote Proxy)
 
+## ¿Quién es quién en Proxy?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Subject** | Interfaz común para Proxy y RealSubject | `Image` - operaciones que ambos implementan | "Reproductor de video" (interfaz) |
+| **RealSubject** | Objeto real que hace el trabajo pesado | `HighResolutionImage` - carga y muestra imagen real | Archivo de video real (pesado, en disco) |
+| **Proxy** | Sustituto que controla acceso y agrega funcionalidad | `ImageProxy` - lazy loading, caching, control | Thumbnail/preview (ligero, controla carga) |
+| **Client** | Usa el servicio sin saber si es Proxy o Real | `ImageViewer` - no sabe si imagen está cargada | Persona que quiere ver película |
+
 ## Diagrama
 
 ```mermaid

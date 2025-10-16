@@ -17,6 +17,15 @@ Separar la construcción de un objeto complejo de su representación, permitiend
 - Builders de UI (formularios, ventanas)
 - Configuraciones de testing
 
+## ¿Quién es quién en Builder?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Builder** | Acumula parámetros y valida antes de crear | `DatabaseConfigBuilder` - configura paso a paso | Arquitecto (diseña casa paso a paso) |
+| **Product** | Objeto final complejo e inmutable | `DatabaseConfig` - configuración completa | Casa terminada (compleja, muchas opciones) |
+| **Director** | Coordinador opcional que conoce pasos | Cliente que dice "configuración de producción" | Cliente ("casa familiar" vs "casa de lujo") |
+| **Fluent Interface** | API encadenada para facilidad de uso | `.host().port().database().build()` | Conversación natural ("3 habitaciones, 2 baños") |
+
 ## Diagrama
 
 ```mermaid

@@ -20,11 +20,19 @@ Permite implementar undo/redo guardando "fotos" del estado de un objeto en momen
 - Historial de cambios
 - Sistemas de backup automático
 
+## ¿Quién es quién en Memento?
+
+| Actor | Lo que realmente es | Ejemplo | Analogía |
+|-------|--------------------|---------|-----------|
+| **Originator** | Objeto que cambia y crea snapshots | `TextEditor` - crea y restaura su estado | Videojuego (cambia constantemente) |
+| **Memento** | "Foto" del estado en un momento específico | `EditorMemento` - guarda contenido, cursor, selección | Archivo de guardado (snapshot del juego) |
+| **Caretaker** | Administrador del historial de snapshots | `EditorHistory` - gestiona múltiples mementos | Sistema de guardado (gestiona saves) |
+
 ## Diagrama
 
 ```mermaid
 classDiagram
-    namespace Memento {
+    namespace MementoPattern {
         class Originator {
             -state: State
             +createMemento() Memento
